@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Btn from '../../components/btn'
 import Container from '../../components/container'
 import RadioGroup from '../../components/radio-group'
+import LoadingSpinner from '../../components/loading-spinner'
 import './style.scss'
 
 function Home () {
@@ -127,6 +128,10 @@ function Home () {
 								)
 							))
 						}
+						<div className={'form__loading'}>
+							<LoadingSpinner size={'md'}/>
+							<p>We Are Fetching The Questions!</p>
+						</div>
 						<div className={'form__footer'} tabIndex={0} onKeyDown={changeFocus}>
 							<Btn
 								variant='primary'
