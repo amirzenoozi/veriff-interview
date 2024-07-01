@@ -1,0 +1,27 @@
+{
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"extends": [
+		"standard-with-typescript"
+	],
+	"env": {
+		"node": true,
+		"jest": true
+	},
+	"ignorePatterns": [
+		"node_modules/",
+		".eslintrc.js"
+	],
+	"rules": {
+		"no-tabs": "off",
+		"@typescript-eslint/indent": ["error", "tab"],
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/ban-types": "off",
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/no-unsafe-argument": "off",
+		"@typescript-eslint/strict-boolean-expressions": "off",
+		"@typescript-eslint/no-misused-promises": "off",
+		"@typescript-eslint/no-confusing-void-expression": ["error", {"ignoreArrowShorthand": true}]
+	}
+}
