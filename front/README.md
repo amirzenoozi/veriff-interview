@@ -23,8 +23,8 @@ This project lets you interact with a form that you get from the server.
 
 In the project directory, you can run:
 - ``` git clone git@github.com:amirzenoozi/veriff-interview.git ```
-- ``` cd veriff-interview/front ```
 - ``` git config core.hooksPath .githooks ```
+- ``` cd veriff-interview/front ```
 - ``` yarn install ```
 - ``` yarn start ```
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
