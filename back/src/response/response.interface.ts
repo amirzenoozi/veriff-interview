@@ -4,6 +4,7 @@ export interface Result {
 }
 
 export interface Response {
+	uuid: string;
 	verificationUuid: string;
 	created_at: Date;
 	deleted_at?: Date;
