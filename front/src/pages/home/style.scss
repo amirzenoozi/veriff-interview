@@ -27,5 +27,18 @@
         &:hover {
             background-color: rgba(245, 245, 245, 1);
         }
+
+        > p {
+            font-size: px-to-rem(14);
+            font-weight: 400;
+            line-height: px-to-rem(20);
+            letter-spacing: px-to-rem(-0.15);
+            margin-bottom: px-to-rem(8);
+            color: #212121;
+        }
+    }
+    &__footer {
+        margin-top: px-to-rem(32);
+        padding: px-to-rem(12);
     }
 }

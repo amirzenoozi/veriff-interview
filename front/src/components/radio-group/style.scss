@@ -2,11 +2,17 @@
 @import '../../styles/index';
 
 $baseClass: 'radio';
+$checkedColor: #11615C;
+$checkedColorHover: #4D8985;
+$unCheckedColorHover: #DFFBF2;
+$disabledColor: #EEEEEE;
+$disabledTextColor: #9E9E9E;
 
 .#{$baseClass} {
     position: relative;
-    padding: px-to-rem(0) px-to-rem(24);
     display: inline-block;
+    overflow: hidden;
+    border: 1px solid $checkedColor;
 
     & > input[type="radio"] {
         position: absolute;
@@ -19,41 +25,62 @@ $baseClass: 'radio';
         top: 0;
         margin: 0;
 
-        &:checked ~ .#{$baseClass}-selector:after {
-            background-color: #FFC107;
-        }
-    }
-
-    &-selector {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(0, -50%);
-        height: px-to-rem(12);
-        width: px-to-rem(12);
-        border: px-to-rem(1) solid #C9CED6;
-        border-radius: 100%;
-        z-index: 1;
-        transition: all 0.2s ease-in-out;
-
-        &:after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+        & + label {
+            padding: px-to-rem(0) px-to-rem(24);
             background-color: #FFFFFF;
-            width: px-to-rem(10);
-            height: px-to-rem(10);
-            border-radius: 100%;
+            color: $checkedColor;
+            font-size: px-to-rem(14);
+            line-height: px-to-rem(20);
+            letter-spacing: px-to-rem(-0.15);
+            min-height: px-to-rem(32);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &:hover + label {
+            background-color: $unCheckedColorHover;
+        }
+        &:checked + label {
+            background-color: $checkedColor;
+            color: #FFFFFF;
+        }
+        &:checked:hover + label {
+            background-color: $checkedColorHover;
+            color: #FFFFFF;
+        }
+        &:disabled + label {
+            background-color: #FFFFFF;
+            color: $disabledTextColor;
+            cursor: not-allowed;
+        }
+        &:checked:disabled + label {
+            background-color: $disabledColor;
+            color: $disabledTextColor;
+            cursor: not-allowed;
         }
     }
 
-    &-group {
-        display: flex;
-        flex-direction: column;
+    &__group {
+        display: inline-flex;
+        flex-direction: row;
         align-items: flex-start;
         justify-content: flex-start;
+
+        & > .radio:first-child {
+            border-top-left-radius: px-to-rem(4);
+            border-bottom-left-radius: px-to-rem(4);
+        }
+        & > .radio:last-child {
+            border-top-right-radius: px-to-rem(4);
+            border-bottom-right-radius: px-to-rem(4);
+        }
+        & > .radio:not(:last-child) {
+            border-right: none;
+        }
+    }
+
+    &--disabled {
+        border: 1px solid $disabledColor;
     }
 
     &:not(:last-child) {

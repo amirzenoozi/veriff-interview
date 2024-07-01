@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Btn from '../../components/btn'
 import Container from '../../components/container'
 import FlexCol from '../../components/flex-col'
 import FlexRow from '../../components/flex-row'
@@ -65,10 +66,11 @@ function Home () {
 									(
 										<FlexCol key={item.id} xs={24}>
 											<div className={'form__field'}>
-												<label htmlFor={item.id}>{item.description}</label>
+												<p>{item.description}</p>
 												<RadioGroup
 													options={radioOptions}
 													name={`field-${item.id}`}
+													disabled={false}
 													clickHandler={radioClickCallBack}
 													otherProps={item}
 												/>
@@ -78,6 +80,15 @@ function Home () {
 								))
 							}
 						</FlexRow>
+						<div className={'form__footer'}>
+							<Btn
+								variant='primary'
+								text='Submit'
+								type='submit'
+								disable={false}
+								block={true}
+							/>
+						</div>
 					</div>
 				</Container>
 			</section>
