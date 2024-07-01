@@ -1,0 +1,34 @@
+@import '../../styles/index';
+
+.loading {
+    position: relative;
+    display: inline-block;
+    border: 4px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #11615C;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+
+    &--sm {
+        width: px-to-rem(20);
+        height: px-to-rem(20);
+        border-width: 3px;
+    }
+    &--md {
+        width: px-to-rem(35);
+        height: px-to-rem(35);
+        border-width: 4px;
+    }
+    &--lg {
+        width: px-to-rem(50);
+        height: px-to-rem(50);
+        border-width: 5px;
+    }
+}
+
+@keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
