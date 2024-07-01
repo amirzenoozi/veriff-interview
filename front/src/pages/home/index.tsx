@@ -7,6 +7,7 @@ import './style.scss'
 
 function Home () {
 	const [results, setResults] = useState<Array<{ checkId: string, result: string }>>([])
+	const [fetching] = useState(false)
 	const radioOptions = [
 		{
 			value: 'yes',
@@ -107,34 +108,40 @@ function Home () {
 			<section className={'page'}>
 				<Container size={'xs'}>
 					<form className={'form'} onSubmit={submitTheForm}>
-						{
-							questions.map((item, index) => (
-								(
-									<div
-										key={item.id}
-										className={['form__field', ...checkDisabled(index) ? ['form__field--disabled'] : []].join(' ')}
-										tabIndex={0}
-										onKeyDown={changeFocus}
-									>
-										<p>{item.description}</p>
-										<RadioGroup
-											options={radioOptions}
-											name={`field-${item.id}`}
-											disabled={checkDisabled(index)}
-											clickHandler={radioClickCallBack}
-											otherProps={item}
-										/>
-									</div>
-								)
-							))
-						}
-						<div className={'form__loading'}>
-							<LoadingSpinner size={'md'}/>
-							<p>We Are Fetching The Questions!</p>
+						<div className={'form__content'}>
+							{
+								questions.map((item, index) => (
+									(
+										<div
+											key={item.id}
+											className={['form__field', ...checkDisabled(index) ? ['form__field--disabled'] : []].join(' ')}
+											tabIndex={0}
+											onKeyDown={changeFocus}
+										>
+											<p>{item.description}</p>
+											<RadioGroup
+												options={radioOptions}
+												name={`field-${item.id}`}
+												disabled={checkDisabled(index)}
+												clickHandler={radioClickCallBack}
+												otherProps={item}
+											/>
+										</div>
+									)
+								))
+							}
 						</div>
+						{
+							fetching && (
+								<div className={'form__loading'}>
+									<LoadingSpinner size={'md'}/>
+									<p>We Are Fetching The Questions!</p>
+								</div>
+							)
+						}
 						<div className={'form__footer'} tabIndex={0} onKeyDown={changeFocus}>
 							<Btn
-								variant='primary'
+								variant="primary"
 								text='Submit'
 								type='submit'
 								disable={isSubmitDisabled()}
