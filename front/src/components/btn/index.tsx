@@ -35,11 +35,11 @@ const BtnClassGenerator = (variant: string, icon: boolean, iconPosition: string,
 	const classes = [
 		'btn',
 		`btn--${variant}`,
-		...(iconName !== '' && iconPosition === 'left') ? ['btn--prepend'] : [],
-		...(iconName !== '' && iconPosition === 'right') ? ['btn--append'] : [],
-		...disable ? ['btn--disabled'] : [],
-		...icon ? ['btn--icon'] : [],
-		...block ? ['btn--block'] : []
+		...(iconName !== '' && iconPosition === 'left' ? ['btn--prepend'] : []),
+		...(iconName !== '' && iconPosition === 'right' ? ['btn--append'] : []),
+		...(disable ? ['btn--disabled'] : []),
+		...(icon ? ['btn--icon'] : []),
+		...(block ? ['btn--block'] : [])
 	]
 	return classes.join(' ')
 }
