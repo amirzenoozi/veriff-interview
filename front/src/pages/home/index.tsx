@@ -76,25 +76,50 @@ function Home () {
 			const elements = event.target.querySelectorAll('div.radio input[type="radio"]')
 			const targetElement = Array.from(elements).findIndex((item: any) => item.value === 'no')
 			elements[targetElement].click()
-		} else {
-			console.log('key code', event)
 		}
+	}
+
+	const checkDisabled = (index: number) => {
+		if (index === 0) {
+			return false
+		} else {
+			const answerIndex = results.findIndex((item) => item.checkId === questions[index - 1].id)
+			return answerIndex === -1 || results[answerIndex].result === 'no'
+		}
+	}
+
+	const isSubmitDisabled = () => {
+		// The button is activated If:
+		// 1. All questions are answered
+		// 2. At least one question is answered with 'no'
+		const isAllAnswered = results.length === questions.length
+		const atLeastOneNo = results.some((item) => item.result === 'no')
+		return !((!atLeastOneNo && isAllAnswered) || atLeastOneNo)
+	}
+
+	const submitTheForm = () => {
+		console.log(results)
 	}
 
 	return (
 		<>
 			<section className={'page'}>
-				<Container size={'sm'}>
-					<form className={'form'}>
+				<Container size={'xs'}>
+					<form className={'form'} onSubmit={submitTheForm}>
 						{
 							questions.map((item, index) => (
 								(
-									<div key={item.id} className={'form__field'} tabIndex={0} onKeyDown={changeFocus}>
+									<div
+										key={item.id}
+										className={['form__field', ...checkDisabled(index) ? ['form__field--disabled'] : []].join(' ')}
+										tabIndex={0}
+										onKeyDown={changeFocus}
+									>
 										<p>{item.description}</p>
 										<RadioGroup
 											options={radioOptions}
 											name={`field-${item.id}`}
-											disabled={false}
+											disabled={checkDisabled(index)}
 											clickHandler={radioClickCallBack}
 											otherProps={item}
 										/>
@@ -107,7 +132,7 @@ function Home () {
 								variant='primary'
 								text='Submit'
 								type='submit'
-								disable={false}
+								disable={isSubmitDisabled()}
 								block={true}
 							/>
 						</div>
