@@ -53,7 +53,7 @@ function Home () {
 		setResults(tempResults)
 	}
 
-	const focusNext = (event: any) => {
+	const changeFocus = (event: any) => {
 		if (event.keyCode === 40) {
 			// down arrow
 			const nextElement = event.target.nextElementSibling
@@ -89,7 +89,7 @@ function Home () {
 						{
 							questions.map((item, index) => (
 								(
-									<div key={item.id} className={'form__field'} tabIndex={0} onKeyDown={focusNext}>
+									<div key={item.id} className={'form__field'} tabIndex={0} onKeyDown={changeFocus}>
 										<p>{item.description}</p>
 										<RadioGroup
 											options={radioOptions}
@@ -102,7 +102,7 @@ function Home () {
 								)
 							))
 						}
-						<div className={'form__footer'} tabIndex={0} onKeyDown={focusNext}>
+						<div className={'form__footer'} tabIndex={0} onKeyDown={changeFocus}>
 							<Btn
 								variant='primary'
 								text='Submit'
