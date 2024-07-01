@@ -1,4 +1,4 @@
-## Description
+## Veriff Backend Task
 
 This project was bootstrapped with [Nest](https://github.com/nestjs/nest).
 his project lets you create the survey questions and store the submitted answers.
@@ -9,6 +9,8 @@ his project lets you create the survey questions and store the submitted answers
 - [x] Store Survey Answers
 - [ ] Unit Test
     - [x] Validate Answers
+    - [x] Validate Questions
+    - [x] Validate Submitting Answers
 - [ ] Deployment
     - [x] Dockerfile
     - [x] GitHub Actions to Push Image to DockerHub
