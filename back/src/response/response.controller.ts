@@ -1,6 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { ResponseService } from './response.service';
 import { Response } from './response.interface';
+import { CreateResponseDto } from './create-response.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('response')
@@ -10,13 +11,13 @@ export class ResponseController {
 
 	@ApiTags('response')
 	@Post('/')
-	async submitResponse(
-		@Body('verificationUuid') verificationUuid: string,
-		@Body('results') results: any[],
+	async createResponse(
+		@Body() createResponseDto: CreateResponseDto,
 	): Promise<Response> {
-		return await this.responseService.submitResponse(
-			verificationUuid,
-			results,
-		);
+		try {
+			return await this.responseService.createResponse(createResponseDto);
+		} catch (error) {
+			throw new BadRequestException(error.message);
+		}
 	}
 }

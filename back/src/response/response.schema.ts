@@ -7,8 +7,8 @@ export const ResponseSchema = new mongoose.Schema(
 		deleted_at: {type: Date, default: null},
 		results: [
 			{
-				checkId: String,
-				result: String, // 'yes' or 'no'
+				checkId: { type: String, required: true },
+				result: { type: String, required: true }, // 'yes' or 'no'
 			},
 		],
 	},
