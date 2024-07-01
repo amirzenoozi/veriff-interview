@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Btn from '../../components/btn'
 import Container from '../../components/container'
-import FlexCol from '../../components/flex-col'
-import FlexRow from '../../components/flex-row'
 import RadioGroup from '../../components/radio-group'
 import './style.scss'
 
@@ -55,32 +53,56 @@ function Home () {
 		setResults(tempResults)
 	}
 
+	const focusNext = (event: any) => {
+		if (event.keyCode === 40) {
+			// down arrow
+			const nextElement = event.target.nextElementSibling
+			if (nextElement) {
+				nextElement.focus()
+			}
+		} else if (event.keyCode === 38) {
+			// up arrow
+			const prevElement = event.target.previousElementSibling
+			if (prevElement) {
+				prevElement.focus()
+			}
+		} else if (event.keyCode === 97 || event.keyCode === 49) {
+			// 1 key
+			const elements = event.target.querySelectorAll('div.radio input[type="radio"]')
+			const targetElement = Array.from(elements).findIndex((item: any) => item.value === 'yes')
+			elements[targetElement].click()
+		} else if (event.keyCode === 98 || event.keyCode === 50) {
+			// 2 key
+			const elements = event.target.querySelectorAll('div.radio input[type="radio"]')
+			const targetElement = Array.from(elements).findIndex((item: any) => item.value === 'no')
+			elements[targetElement].click()
+		} else {
+			console.log('key code', event)
+		}
+	}
+
 	return (
 		<>
 			<section className={'page'}>
 				<Container size={'sm'}>
-					<div className={'form'}>
-						<FlexRow space={false}>
-							{
-								questions.map((item, index) => (
-									(
-										<FlexCol key={item.id} xs={24}>
-											<div className={'form__field'}>
-												<p>{item.description}</p>
-												<RadioGroup
-													options={radioOptions}
-													name={`field-${item.id}`}
-													disabled={false}
-													clickHandler={radioClickCallBack}
-													otherProps={item}
-												/>
-											</div>
-										</FlexCol>
-									)
-								))
-							}
-						</FlexRow>
-						<div className={'form__footer'}>
+					<form className={'form'}>
+						{
+							questions.map((item, index) => (
+								(
+									<div key={item.id} className={'form__field'} tabIndex={0} onKeyDown={focusNext}>
+										<p>{item.description}</p>
+										<RadioGroup
+											options={radioOptions}
+											name={`field-${item.id}`}
+											disabled={false}
+											clickHandler={radioClickCallBack}
+											otherProps={item}
+										/>
+									</div>
+								)
+							))
+						}
+						<div className={'form__footer'} tabIndex={0} onKeyDown={focusNext}>
 							<Btn
 								variant='primary'
 								text='Submit'
@@ -89,7 +111,7 @@ function Home () {
 								block={true}
 							/>
 						</div>
-					</div>
+					</form>
 				</Container>
 			</section>
 		</>
