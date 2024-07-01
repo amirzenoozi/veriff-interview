@@ -2,11 +2,12 @@ import type IconsList from '../../constants/icons'
 
 interface BtnProps {
 	text?: string
-	variant?: 'primary-dark' | 'primary-light' | 'secondary' | 'ghost-dark' | 'ghost-light' | 'linear-light'
+	variant?: 'primary'
 	icon?: boolean
 	iconName?: keyof typeof IconsList | ''
 	iconPosition?: 'left' | 'right'
 	type?: 'button' | 'submit' | 'reset'
+	block?: boolean
 	size?: number
 	to?: string
 	disable?: boolean

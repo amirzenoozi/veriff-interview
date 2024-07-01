@@ -5,11 +5,12 @@ import IconsList from '../../constants/icons'
 
 const Btn = ({
 	text = '',
-	variant = 'primary-dark',
+	variant = 'primary',
 	icon = false,
 	iconName = '',
 	iconPosition = 'left',
 	type = 'button',
+	block = false,
 	size = 24,
 	disable = false,
 	to = '',
@@ -17,7 +18,7 @@ const Btn = ({
 }: BtnProps) => {
 	return (
 		<button
-			className={BtnClassGenerator(variant, icon, iconPosition, disable)}
+			className={BtnClassGenerator(variant, icon, iconPosition, disable, block, iconName)}
 			type={type}
 			disabled={disable}
 			{...props}
@@ -30,14 +31,15 @@ const Btn = ({
 	)
 }
 
-const BtnClassGenerator = (variant: string, icon: boolean, iconPosition: string, disable: boolean) => {
+const BtnClassGenerator = (variant: string, icon: boolean, iconPosition: string, disable: boolean, block: boolean, iconName: string) => {
 	const classes = [
 		'btn',
 		`btn--${variant}`,
-		iconPosition === 'left' && 'btn--prepend',
-		iconPosition === 'right' && 'btn--append',
-		disable && 'btn--disabled',
-		icon && 'btn--icon'
+		...(iconName !== '' && iconPosition === 'left') ? ['btn--prepend'] : [],
+		...(iconName !== '' && iconPosition === 'right') ? ['btn--append'] : [],
+		...disable ? ['btn--disabled'] : [],
+		...icon ? ['btn--icon'] : [],
+		...block ? ['btn--block'] : []
 	]
 	return classes.join(' ')
 }

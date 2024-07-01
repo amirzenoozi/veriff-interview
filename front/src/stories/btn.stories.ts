@@ -15,8 +15,8 @@ const meta = {
 		iconName: { control: 'text', defaultValue: 'Save' },
 		variant: {
 			control: 'select',
-			defaultValue: 'primary-dark',
-			options: ['primary-dark', 'primary-light', 'secondary', 'ghost-dark', 'ghost-light', 'linear-light']
+			defaultValue: 'primary',
+			options: ['primary']
 		}
 	}
 } satisfies Meta<typeof Btn>
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
 	args: {
-		variant: 'primary-dark',
+		variant: 'primary',
 		text: 'Button',
 		icon: false,
 		iconName: 'Save',
