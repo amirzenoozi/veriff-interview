@@ -1,0 +1,25 @@
+.container {
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+    &--xs {
+        max-width: 375px;
+    }
+    &--sm {
+        max-width: 576px;
+    }
+    &--md {
+        max-width: 768px;
+    }
+    &--lg {
+        max-width: 992px;
+    }
+    &--xl {
+        max-width: 1200px;
+    }
+}
