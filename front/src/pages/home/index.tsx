@@ -57,7 +57,7 @@ function Home () {
 		if (event.keyCode === 40) {
 			// down arrow
 			const nextElement = event.target.nextElementSibling
-			if (nextElement) {
+			if (nextElement && !nextElement.classList.contains('form__field--disabled')) {
 				nextElement.focus()
 			}
 		} else if (event.keyCode === 38) {
