@@ -4,7 +4,7 @@ import type FlexColProps from './type'
 
 const FlexCol = ({ xs = 24, sm = 0, md = 0, lg = 0, xl = 0, xxl = 0, center = false, children }: FlexColProps) => {
 	return (
-		<div className={[center && 'col--center', colClassname(xs, sm, md, lg, xl, xxl)].join(' ')}>
+		<div className={['col', ...center ? ['col--center'] : [], colClassname(xs, sm, md, lg, xl, xxl)].join(' ')}>
 			{ children }
 		</div>
 	)

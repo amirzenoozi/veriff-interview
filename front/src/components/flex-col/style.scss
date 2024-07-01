@@ -14,6 +14,11 @@ $grid-gutter: 16px;
     }
 }
 
+.row--noMargin .col {
+    padding: 0;
+    margin-bottom: 0;
+}
+
 @mixin col-generator($bp) {
     @for $col from 1 through $grid-columns {
         .col-#{$bp}-#{$col} {
@@ -22,11 +27,6 @@ $grid-gutter: 16px;
             padding: 0 calc($grid-gutter / 2);
             margin-bottom: $grid-gutter;
             box-sizing: border-box;
-        }
-
-        .row--noMargin .col-#{$bp}-#{$col} {
-            padding: 0;
-            margin-bottom: 0;
         }
     }
 }
