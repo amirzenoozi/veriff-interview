@@ -46,7 +46,32 @@ export class VerificationService {
     return await verification.save();
   }
 
-  async getActiveVerifications(): Promise<Verification[]> {
-    return await this.verificationModel.find({ deleted_at: null }).exec();
+  async getActiveVerifications(
+      page: number = 1,
+      limit: number = 10,
+      order: 'asc' | 'desc' = 'asc',
+      orderBy: string = 'created_at'
+  ): Promise<{ data: Verification[], meta: any }> {
+    const skip = (page - 1) * limit;
+    const totalCount = await this.verificationModel.countDocuments({ deleted_at: null });
+
+    const verifications = await this.verificationModel
+        .find({ deleted_at: null })
+        .sort({ [orderBy]: order === 'asc' ? 1 : -1 })
+        .skip(skip)
+        .limit(limit)
+        .exec();
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const meta = {
+      total_count: totalCount,
+      total_pages: totalPages,
+      current_page: page,
+      limit: limit,
+      order_by: orderBy,
+      order: order
+    };
+
+    return { data: verifications, meta };
   }
 }

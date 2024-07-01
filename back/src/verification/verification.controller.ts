@@ -6,11 +6,11 @@ import {
   Body,
   NotFoundException,
   BadRequestException,
-  Delete,
+  Delete, Query,
 } from '@nestjs/common';
 import { VerificationService } from './verification.service';
 import { Verification } from './verification.interface';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateVerificationDto } from './create-verification.dto';
 
 @Controller('verification')
@@ -36,8 +36,21 @@ export class VerificationController {
 
   @ApiTags('verification')
   @Get('/')
-  async getVerifications(): Promise<Verification[]> {
-    return await this.verificationService.getActiveVerifications();
+  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number', example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Results per page', example: 10 })
+  @ApiQuery({ name: 'order', required: false, enum: ['asc', 'desc'], description: 'Order of results', example: 'asc' })
+  @ApiQuery({ name: 'orderBy', required: false, type: String, description: 'Field to order by', example: 'created_at' })
+  async getActiveVerifications(
+      @Query('page') page: number = 1,
+      @Query('limit') limit: number = 10,
+      @Query('order') order: 'asc' | 'desc' = 'asc',
+      @Query('orderBy') orderBy: string = 'created_at'
+  ): Promise<{ data: Verification[], meta: any }> {
+    try {
+      return await this.verificationService.getActiveVerifications(page, limit, order, orderBy);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @ApiTags('verification')
