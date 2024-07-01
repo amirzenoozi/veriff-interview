@@ -9,14 +9,11 @@ import { VerificationController } from './verification/verification.controller';
 import { VerificationService } from './verification/verification.service';
 import { ResponseController } from './response/response.controller';
 import { APP_PIPE } from '@nestjs/core';
-import * as dotenv from 'dotenv';
-import * as process from 'node:process';
-
-dotenv.config();
+import configuration from '../config/configuration';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot(configuration().database.mongo.uri),
     MongooseModule.forFeature([
       { name: 'Verification', schema: VerificationSchema },
       { name: 'Response', schema: ResponseSchema },
