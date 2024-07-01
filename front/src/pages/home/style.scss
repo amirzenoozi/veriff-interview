@@ -40,7 +40,7 @@
         transition: all 150ms ease-in-out;
         width: 100%;
 
-        &:hover {
+        &:not(.form__field--disabled):hover {
             background-color: #F5F5F5;
         }
         &:focus {
