@@ -1,8 +1,9 @@
 export interface Response {
-  verificationUuid: string;
-  results: {
-    checkId: string;
-    result: string; // 'yes' or 'no'
-  }[];
-  surveyConnection: string;
+	verificationUuid: string;
+	created_at: Date;
+	deleted_at?: Date;
+	results: {
+		checkId: string;
+		result: string; // 'yes' or 'no'
+	}[];
 }
