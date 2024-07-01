@@ -19,10 +19,19 @@ export class ResponseService {
 			throw new NotFoundException('Verification UUID not found');
 		}
 
-		const createdResponse = new this.responseModel({
-			verificationUuid: verificationUuid,
-			results: results,
+		// Check If all results checkId exist in verification questions or not
+		const sortedQuestions = verification.questions.sort((a, b) => a.priority - b.priority);
+		const questionIds = sortedQuestions.map((question) => question.id);
+		const isAllCheckIdExist = questionIds.every((qid) => {
+			return results.some((result) => result.checkId === qid);
 		});
-		return await createdResponse.save();
+
+		throw new NotFoundException('Wrong!!');
+
+		// const createdResponse = new this.responseModel({
+		// 	verificationUuid: verificationUuid,
+		// 	results: results,
+		// });
+		// return await createdResponse.save();
 	}
 }
