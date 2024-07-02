@@ -33,8 +33,7 @@ Moreover, since the veriff is an international company, I added the `i18n` to ha
   - [x] Container
 - [ ] Deployment
   - [x] Dockerfile
-  - [x] GitHub Actions to Push Image to DockerHub
-  - [x] Deploy on external server
+  - [x] GitHub Actions to Run the Tests
 
 ## Run the project
 In the project directory, you can run:

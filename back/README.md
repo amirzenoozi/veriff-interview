@@ -25,9 +25,7 @@ In addition, I added the `PostMan` Collection for the API, Which is available in
     - [x] Validate Questions
     - [x] Validate Submitting Answers
 - [ ] Deployment
-    - [x] Dockerfile
-    - [x] GitHub Actions to Push Image to DockerHub
-    - [x] Deploy on external server
+    - [x] GitHub Actions to Run Tests
 
 ## Run the project
 In the project directory, you can run:
