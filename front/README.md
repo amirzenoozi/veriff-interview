@@ -3,8 +3,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This project lets you interact with a form that you get from the server.
 
-## Objectives
+## My Perspective
+It is really important to implement the validation rules in the Frontend side to prevent too many requests to the server.
+Each form in front-end side should have loading state to prevent the user to submit the form multiple times.
+Moreover, If we are fetching the data from the server, It's better to have a loading state to prevent the user to see the empty page.
+I Know that we don't have a static questions, so I implement the main page in the way that we always get the latest questions from the server.
+Also, I added the `StoryBook` to have a better understanding of the components and their props.
+First I Implemented the Grid system with FlexBox, then I Saw that we don't need to use grid System for the question list, so I replaced it.
+Moreover, since the veriff is an international company, I added the `i18n` to have the multi-language support for the static texts.
 
+## Objectives
 - [x] Mobile First Design
 - [x] Reusable Components
 - [x] Add StoryBook
@@ -20,7 +28,6 @@ This project lets you interact with a form that you get from the server.
   - [x] Deploy on external server
 
 ## Run the project
-
 In the project directory, you can run:
 - ``` git clone git@github.com:amirzenoozi/veriff-interview.git ```
 - ``` git config core.hooksPath .githooks ```
@@ -29,8 +36,15 @@ In the project directory, you can run:
 - ``` yarn start ```
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Other Available Scripts
+## Future Features
+According to the veriff mission, It is really important to have a general components for every type of questions.
+For example, Maybe we need to answer some quantitative questions or rating based questions, instead of Yes/No questions.
+So, I developed a RadioGroup component based on this.
+Also, Instead Of getting the static questions from the server, It's better to let users choose between the available verifications.
+Generate the Multi-language questions based on the region or the customers.
+Moreover, It's better to let users update their answers after submitting the form.
 
+## Other Available Scripts
 1. For Test: `yarn run test`
 2. For Build: `yarn run build`
 3. For Manual Setting: `yarn run eject`
