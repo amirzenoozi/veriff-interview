@@ -57,8 +57,12 @@
             color: #212121;
         }
 
-        &--disabled > p {
-            color: #9E9E9E;
+        &--disabled {
+            pointer-events: none;
+
+            & > p {
+                color: #9E9E9E;
+            }
         }
     }
     &__footer {
