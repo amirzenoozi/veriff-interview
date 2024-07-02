@@ -1,4 +1,4 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, NotFoundException } from '@nestjs/common';
 import { ResponseService } from './response.service';
 import { Response } from './response.interface';
 import { CreateResponseDto } from './create-response.dto';
@@ -17,6 +17,9 @@ export class ResponseController {
 		try {
 			return await this.responseService.createResponse(createResponseDto);
 		} catch (error) {
+			if (error instanceof NotFoundException) {
+				throw error;
+			}
 			throw new BadRequestException(error.message);
 		}
 	}
