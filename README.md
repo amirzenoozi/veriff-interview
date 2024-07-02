@@ -6,7 +6,6 @@ This Projects Let you get verification Questions from the server and answer them
 ## Dependencies
 - Node.js
 - Yarn
-- Docker
 - MongoDB
 
 ## Database
@@ -14,6 +13,14 @@ Before running the project, you need to have a MongoDB instance running on your 
 You can use the following Image on DockerHub to run a MongoDB instance on your local machine.
 
 - DockerHub Image: [MongoDB](https://hub.docker.com/r/mongodb/mongodb-community-server)
+
+
+## Docs
+Each API need to be documented in the way that every one can run and test it.
+So I created a Postman Collection for the backend side you just need to import it to your Postman and run it.
+Also, I created a README file for both backend and frontend side that you can find them in the following links:
+- [Backend Docs](./back/README.md)
+- [Frontend Docs](./front/README.md)
 
 ## Objectives
 - [ ] Apps
@@ -35,3 +42,10 @@ In the project directory, you can run:
 - ``` yarn install ```
 - ``` cd veriff-interview/back ```
 - ``` yarn install ```
+
+Or you can run the following bash script to install dependencies:
+- ``` git clone git@github.com:amirzenoozi/veriff-interview.git ```
+- ``` git config core.hooksPath .githooks ```
+- ``` cd veriff-interview ```
+- ``` sh install.sh ```
+- ``` sh runner.sh ```
