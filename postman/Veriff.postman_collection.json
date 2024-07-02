@@ -12,12 +12,30 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{endPoint}}/verification",
+					"raw": "{{endPoint}}/verification?limit=1&page=1&order_by=created_at&order=desc",
 					"host": [
 						"{{endPoint}}"
 					],
 					"path": [
 						"verification"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "order_by",
+							"value": "created_at"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
 					]
 				}
 			},
