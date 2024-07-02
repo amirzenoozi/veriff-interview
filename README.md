@@ -25,8 +25,11 @@ I wrote all **my perspective** and the way I think about the project in the `REA
 - [ ] Apps
   - [x] Frontend
   - [x] Backend
+  - [x] Postman Collection
+- [ ] Scripts
   - [x] Bash Script to Run Both
   - [x] Bach Script to install dependencies
+  - [x] Bash Script To Create The First Verification Question Set
 - [ ] Deployment
   - [ ] DockerCompose File
   - [x] Dockerfile
