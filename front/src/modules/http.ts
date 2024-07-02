@@ -41,11 +41,13 @@ class HttpClient {
 			const status = error.response.status
 
 			if (status >= 500 && status < 600) {
-				toast('Something Went Wrong!', {
+				toast('Server Internal Error, Please try again!', {
 					position: 'bottom-left',
 					theme: 'light',
 					type: 'error'
 				})
+			} else {
+				return Promise.reject(error)
 			}
 		}
 	}

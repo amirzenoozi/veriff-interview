@@ -4,8 +4,10 @@ import Home from './pages/home'
 import Error from './pages/error'
 import Layout from './pages/layout'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 import '@icon-park/react/styles/index.css'
+import 'react-toastify/dist/ReactToastify.css'
 import './i18n'
 
 const router = createBrowserRouter([
@@ -37,5 +39,6 @@ root.render(
 	<React.StrictMode>
 		<RouterProvider router={router}/>
 		<Tooltip id="tooltip-area"/>
+		<ToastContainer />
 	</React.StrictMode>
 )
