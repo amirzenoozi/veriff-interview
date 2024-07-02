@@ -6,7 +6,7 @@ const useQuestions = (limit: number, page: number, orderBy: string, order: strin
 	const [fetching, setFetching] = useState<boolean>(true)
 	const [verificationId, setVerificationId] = useState<string>('')
 
-	// Create Initial Socket Connection
+	// Get questions from API
 	useEffect(() => {
 		setFetching(true)
 		getVerifications(limit, page, orderBy, order).then((res: any) => {
