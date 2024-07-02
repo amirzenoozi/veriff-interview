@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
+import { type Check } from '../../interfaces/check'
 import Btn from '../../components/btn'
 import Container from '../../components/container'
 import RadioGroup from '../../components/radio-group'
 import LoadingSpinner from '../../components/loading-spinner'
-import './style.scss'
 import useQuestions from '../../hooks/useQuestions'
 import { createAnswer } from '../../modules/api'
+import './style.scss'
 
 function Home () {
 	const { questions, fetching, verificationId } = useQuestions(10, 1, 'created_at', 'desc')
-	const [results, setResults] = useState<Array<{ checkId: string, result: string }>>([])
+	const [results, setResults] = useState<Check[]>([])
 	const [submitting, setSubmitting] = useState<boolean>(false)
 	const radioOptions = [
 		{
@@ -21,6 +22,17 @@ function Home () {
 			label: 'No'
 		}
 	]
+
+	const getChecksUpToFirstNo = (checks: Check[]): Check[] => {
+		const result: Check[] = []
+		for (const check of checks) {
+			result.push(check)
+			if (check.result.toLowerCase() === 'no') {
+				break
+			}
+		}
+		return result
+	}
 
 	const radioClickCallBack = (value: any, otherProps: any) => {
 		const tempResults = [...results]
@@ -85,17 +97,10 @@ function Home () {
 	const submitTheForm = (event: any) => {
 		event.preventDefault()
 		setSubmitting(true)
-		// If at least one question is answered with 'no', we only send the first question with 'no' answer
-		const atLeastOneNo = results.some((item) => item.result === 'no')
-		let apiResults = [...results]
-		if (atLeastOneNo) {
-			apiResults = [{ checkId: questions[0].id, result: 'no' }]
-		}
-
 		// Send the results to the API
 		createAnswer({
 			verificationUuid: verificationId,
-			results: apiResults
+			results: getChecksUpToFirstNo(results)
 		}).then((res) => {
 			console.log('Response', res)
 		}).catch((e) => {
