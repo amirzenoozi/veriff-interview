@@ -1,0 +1,20 @@
+name: React App CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Unit Tests
+        run: |
+          echo "Running Unit Tests"
+          cd back
+          yarn install
+          yarn run test:ci
+          echo "Unit Tests Completed"
