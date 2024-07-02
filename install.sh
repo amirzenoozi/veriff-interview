@@ -1,3 +1,6 @@
 # Run Both Front and Backed Application at the same time
-echo "Installing Veriff Interview Packages..."
-for d in ./*/ ; do (cd "$d" && yarn); done
+echo "Installing Frontend Packages..."
+cd front && yarn
+echo "Installing Backend Packages..."
+cd ../back && yarn
+echo "Veriff Interview Application Installed Successfully!"
