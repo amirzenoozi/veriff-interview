@@ -85,9 +85,17 @@ function Home () {
 	const submitTheForm = (event: any) => {
 		event.preventDefault()
 		setSubmitting(true)
+		// If at least one question is answered with 'no', we only send the first question with 'no' answer
+		const atLeastOneNo = results.some((item) => item.result === 'no')
+		let apiResults = [...results]
+		if (atLeastOneNo) {
+			apiResults = [{ checkId: questions[0].id, result: 'no' }]
+		}
+
+		// Send the results to the API
 		createAnswer({
 			verificationUuid: verificationId,
-			results
+			results: apiResults
 		}).then((res) => {
 			console.log('Response', res)
 		}).catch((e) => {
@@ -111,6 +119,7 @@ function Home () {
 											className={['form__field', ...checkDisabled(index) ? ['form__field--disabled'] : []].join(' ')}
 											tabIndex={0}
 											onKeyDown={changeFocus}
+											autoFocus={index === 0}
 										>
 											<p>{item.description}</p>
 											<RadioGroup
