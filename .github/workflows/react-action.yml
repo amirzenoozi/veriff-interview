@@ -16,5 +16,5 @@ jobs:
           echo "Running Unit Tests"
           cd front
           yarn install
-          yarn run test
+          yarn run test:ci
           echo "Unit Tests Completed"
