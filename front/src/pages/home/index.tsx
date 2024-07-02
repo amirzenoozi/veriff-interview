@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Btn from '../../components/btn'
 import Container from '../../components/container'
 import RadioGroup from '../../components/radio-group'
 import LoadingSpinner from '../../components/loading-spinner'
 import './style.scss'
+import useQuestions from '../../hooks/useQuestions'
+import { createAnswer } from '../../modules/api'
 
 function Home () {
+	const { questions, fetching, verificationId } = useQuestions(10, 1, 'created_at', 'desc')
 	const [results, setResults] = useState<Array<{ checkId: string, result: string }>>([])
-	const [fetching] = useState(false)
+	const [submitting, setSubmitting] = useState<boolean>(false)
 	const radioOptions = [
 		{
 			value: 'yes',
@@ -18,31 +21,6 @@ function Home () {
 			label: 'No'
 		}
 	]
-	const questions = [
-		{
-			id: 'aaa',
-			priority: 10,
-			description: 'Face on the picture matches face on the document'
-		},
-		{
-			id: 'bbb',
-			priority: 5,
-			description: 'Veriff supports presented document'
-		},
-		{
-			id: 'ccc',
-			priority: 7,
-			description: 'Face is clearly visible'
-		},
-		{
-			id: 'ddd',
-			priority: 3,
-			description: 'Document data is clearly visible'
-		}
-	]
-	useEffect(() => {
-		questions.sort((a, b) => a.priority - b.priority)
-	}, [])
 
 	const radioClickCallBack = (value: any, otherProps: any) => {
 		const tempResults = [...results]
@@ -91,6 +69,11 @@ function Home () {
 	}
 
 	const isSubmitDisabled = () => {
+		// If the form is submitting, the button must be disabled
+		if (submitting) {
+			return true
+		}
+
 		// The button is activated If:
 		// 1. All questions are answered
 		// 2. At least one question is answered with 'no'
@@ -99,8 +82,19 @@ function Home () {
 		return !((!atLeastOneNo && isAllAnswered) || atLeastOneNo)
 	}
 
-	const submitTheForm = () => {
-		console.log(results)
+	const submitTheForm = (event: any) => {
+		event.preventDefault()
+		setSubmitting(true)
+		createAnswer({
+			verificationUuid: verificationId,
+			results
+		}).then((res) => {
+			console.log('Response', res)
+		}).catch((e) => {
+			return []
+		}).finally(() => {
+			setSubmitting(false)
+		})
 	}
 
 	return (
@@ -110,7 +104,7 @@ function Home () {
 					<form className={'form'} onSubmit={submitTheForm}>
 						<div className={'form__content'}>
 							{
-								questions.map((item, index) => (
+								questions?.map((item: any, index: number) => (
 									(
 										<div
 											key={item.id}
