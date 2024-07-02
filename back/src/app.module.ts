@@ -12,24 +12,25 @@ import { APP_PIPE } from '@nestjs/core';
 import configuration from '../config/configuration';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot(configuration().database.mongo.uri),
-    MongooseModule.forFeature([
-      { name: 'Verification', schema: VerificationSchema },
-      { name: 'Response', schema: ResponseSchema },
-    ]),
-  ],
-  controllers: [AppController, VerificationController, ResponseController],
-  providers: [
-    AppService,
-    VerificationService,
-    ResponseService,
-    {
-      provide: APP_PIPE,
-      useValue: new ValidationPipe({
-        whitelist: true,
-      }),
-    },
-  ],
+	imports: [
+		MongooseModule.forRoot(configuration().database.mongo.uri),
+		MongooseModule.forFeature([
+			{name: 'Verification', schema: VerificationSchema},
+			{name: 'Response', schema: ResponseSchema},
+		]),
+	],
+	controllers: [AppController, VerificationController, ResponseController],
+	providers: [
+		AppService,
+		VerificationService,
+		ResponseService,
+		{
+			provide: APP_PIPE,
+			useValue: new ValidationPipe({
+				whitelist: true,
+			}),
+		},
+	],
 })
-export class AppModule {}
+export class AppModule {
+}
