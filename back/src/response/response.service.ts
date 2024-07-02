@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Response } from './response.interface';
-import { CreateResponseDto } from './create-response.dto';
+import { Response, Result } from './response.interface';
+import { CreateResponseDto, ResultsDto } from './create-response.dto';
 import { Verification } from '../verification/verification.interface';
 
 @Injectable()
@@ -12,6 +12,16 @@ export class ResponseService {
 		@InjectModel('Verification') private readonly verificationModel: Model<Verification>,
 	) {}
 
+	private readonly countNoResults = (checks: ResultsDto[]): number => {
+		let count = 0;
+		for (let check of checks) {
+			if (check.result.toLowerCase() === "no") {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	async createResponse(createResponseDto: CreateResponseDto): Promise<Response> {
 		const { verificationUuid, results } = createResponseDto;
 		const verification = await this.verificationModel.findOne({ uuid: verificationUuid, deleted_at: null });
@@ -19,19 +29,17 @@ export class ResponseService {
 			throw new NotFoundException('Verification UUID not found');
 		}
 
-		// Check If all results checkId exist in verification questions or not
-		const sortedQuestions = verification.questions.sort((a, b) => a.priority - b.priority);
-		const questionIds = sortedQuestions.map((question) => question.id);
-		const isAllCheckIdExist = questionIds.every((qid) => {
-			return results.some((result) => result.checkId === qid);
+		// Check the number of "no" results
+		const numberOfNoResults = this.countNoResults(results);
+		const ALLOWED_NO_RESULTS: number = 1;
+		if (numberOfNoResults > ALLOWED_NO_RESULTS) {
+			throw new Error(`No More than ${ALLOWED_NO_RESULTS} "no" result is allowed: ${numberOfNoResults} found.`);
+		}
+
+		const createdResponse = new this.responseModel({
+			verificationUuid: verificationUuid,
+			results: results,
 		});
-
-		throw new NotFoundException('Wrong!!');
-
-		// const createdResponse = new this.responseModel({
-		// 	verificationUuid: verificationUuid,
-		// 	results: results,
-		// });
-		// return await createdResponse.save();
+		return await createdResponse.save();
 	}
 }

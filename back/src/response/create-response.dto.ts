@@ -30,5 +30,5 @@ export class ResultsDto {
 
 	@IsNotEmpty()
 	@IsString()
-	result: number;
+	result: string;
 }
