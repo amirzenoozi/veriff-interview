@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Response, Result } from './response.interface';
@@ -33,7 +33,7 @@ export class ResponseService {
 		const numberOfNoResults = this.countNoResults(results);
 		const ALLOWED_NO_RESULTS: number = 1;
 		if (numberOfNoResults > ALLOWED_NO_RESULTS) {
-			throw new Error(`No More than ${ALLOWED_NO_RESULTS} "no" result is allowed: ${numberOfNoResults} found.`);
+			throw new BadRequestException(`No More than ${ALLOWED_NO_RESULTS} "no" result is allowed: ${numberOfNoResults} found.`);
 		}
 
 		const createdResponse = new this.responseModel({
