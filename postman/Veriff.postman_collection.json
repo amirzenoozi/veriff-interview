@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "67719420-b441-45ec-a348-5e2e58c53c73",
+		"name": "Veriff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "911658"
+	},
+	"item": [
+		{
+			"name": "Get Sets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endPoint}}/verification",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"verification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Questions Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questions\": [\r\n        {\r\n            \"id\": \"aaa\",\r\n            \"priority\": 10,\r\n            \"description\": \"Face on the picture matches face on the document\"\r\n        },\r\n        {\r\n            \"id\": \"bbb\",\r\n            \"priority\": 5,\r\n            \"description\": \"Veriff supports presented document\"\r\n        },\r\n        {\r\n            \"id\": \"ccc\",\r\n            \"priority\": 7,\r\n            \"description\": \"Face is clearly visible\"\r\n        },\r\n        {\r\n            \"id\": \"ddd\",\r\n            \"priority\": 3,\r\n            \"description\": \"Document data is clearly visible\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endPoint}}/verification",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"verification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Response",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"verificationUuid\": \"70119e43-7761-4e32-9050-c54af9cdac1a\",\r\n    \"results\": [{\r\n        \"checkId\": \"aaa\",\r\n        \"result\": \"no\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endPoint}}/response",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"response"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Question Set",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endPoint}}/verification/70119e43-7761-4e32-9050-c54af9cdac1a",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"verification",
+						"70119e43-7761-4e32-9050-c54af9cdac1a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Question Set",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{endPoint}}/verification/cf66c465-aacb-4160-b498-081d32b70dd1",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"verification",
+						"cf66c465-aacb-4160-b498-081d32b70dd1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "endPoint",
+			"value": "http://localhost:3200",
+			"type": "string"
+		}
+	]
+}
