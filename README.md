@@ -14,11 +14,10 @@ You can use the following Image on DockerHub to run a MongoDB instance on your l
 
 - DockerHub Image: [MongoDB](https://hub.docker.com/r/mongodb/mongodb-community-server)
 
-
 ## Docs
 Each API need to be documented in the way that every one can run and test it.
 So I created a Postman Collection for the backend side you just need to import it to your Postman and run it.
-Also, I created a README file for both backend and frontend side that you can find them in the following links:
+I wrote all my perspective and the way I think about the project in the README files that you can find them in the following links:
 - [Backend Docs](./back/README.md)
 - [Frontend Docs](./front/README.md)
 

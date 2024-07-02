@@ -5,6 +5,15 @@ This project lets you interact with a form that you get from the server.
 
 ## My Perspective
 It is really important to implement the validation rules in the Frontend side to prevent too many requests to the server.
+Also, for the validation rules I interpreted the "No Answer" in 3 different ways, that I explain each of them here:
+
+  1. If user had more than 1 "No" answer, then we should only send the first question with "No" answer to the server.
+  2. If user had more than 1 "No" answer, then we should send all the answers till the first "No" answer to the server. 
+
+> I prefer to pick the second one since it's more convenient according to the Veriff mission, and also we have priority for the questions.
+> 
+> So, At First I implemented the first one, then I changed it to the second one.
+
 Each form in front-end side should have loading state to prevent the user to submit the form multiple times.
 Moreover, If we are fetching the data from the server, It's better to have a loading state to prevent the user to see the empty page.
 I Know that we don't have a static questions, so I implement the main page in the way that we always get the latest questions from the server.
