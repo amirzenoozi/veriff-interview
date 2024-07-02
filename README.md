@@ -35,7 +35,7 @@ Also, I created a README file for both backend and frontend side that you can fi
   - [x] Deploy on external server
 
 ## Run the project
-In the project directory, you can run:
+#### First Way:
 - ``` git clone git@github.com:amirzenoozi/veriff-interview.git ```
 - ``` git config core.hooksPath .githooks ```
 - ``` cd veriff-interview/front ```
@@ -43,7 +43,8 @@ In the project directory, you can run:
 - ``` cd veriff-interview/back ```
 - ``` yarn install ```
 
-Or you can run the following bash script to install dependencies:
+#### Second Way:
+Or you can run the following bash script to install dependencies and run the project:
 - ``` git clone git@github.com:amirzenoozi/veriff-interview.git ```
 - ``` git config core.hooksPath .githooks ```
 - ``` cd veriff-interview ```
