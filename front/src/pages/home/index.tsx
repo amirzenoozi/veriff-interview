@@ -6,6 +6,7 @@ import RadioGroup from '../../components/radio-group'
 import LoadingSpinner from '../../components/loading-spinner'
 import useQuestions from '../../hooks/useQuestions'
 import { createAnswer } from '../../modules/api'
+import { getChecksUpToFirstNo } from '../../modules/utils'
 import './style.scss'
 
 function Home () {
@@ -22,17 +23,6 @@ function Home () {
 			label: 'No'
 		}
 	]
-
-	const getChecksUpToFirstNo = (checks: Check[]): Check[] => {
-		const result: Check[] = []
-		for (const check of checks) {
-			result.push(check)
-			if (check.result.toLowerCase() === 'no') {
-				break
-			}
-		}
-		return result
-	}
 
 	const radioClickCallBack = (value: any, otherProps: any) => {
 		const tempResults = [...results]
