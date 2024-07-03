@@ -5,12 +5,13 @@ import Container from '../../components/container'
 import RadioGroup from '../../components/radio-group'
 import LoadingSpinner from '../../components/loading-spinner'
 import useQuestions from '../../hooks/useQuestions'
+import { ListCheckbox, Error } from '@icon-park/react'
 import { createAnswer } from '../../modules/api'
 import { getChecksUpToFirstNo } from '../../modules/utils'
 import './style.scss'
 
 function Home () {
-	const { questions, fetching, verificationId } = useQuestions(10, 1, 'created_at', 'desc')
+	const { questions, fetching, verificationId, error } = useQuestions(10, 1, 'created_at', 'desc')
 	const [results, setResults] = useState<Check[]>([])
 	const [submitting, setSubmitting] = useState<boolean>(false)
 	const radioOptions = [
@@ -131,9 +132,25 @@ function Home () {
 						</div>
 						{
 							fetching && (
-								<div className={'form__loading'}>
+								<div className={'form__overlay'}>
 									<LoadingSpinner size={'md'}/>
 									<p>We Are Fetching The Questions!</p>
+								</div>
+							)
+						}
+						{
+							!fetching && !error && questions.length === 0 && (
+								<div className={'form__overlay'}>
+									<ListCheckbox theme="outline" size="32" />
+									<p>There is no Available Question!</p>
+								</div>
+							)
+						}
+						{
+							!fetching && error && (
+								<div className={'form__overlay'}>
+									<Error theme="outline" size="32" />
+									<p>Internal Server Error!</p>
 								</div>
 							)
 						}
