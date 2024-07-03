@@ -21,6 +21,12 @@ Also, I added the `StoryBook` to have a better understanding of the components a
 First I Implemented the Grid system with FlexBox, then I Saw that we don't need to use grid System for the question list, so I replaced it.
 Moreover, since the veriff is an international company, I added the `i18n` to have the multi-language support for the static texts.
 
+In the real world scenario, When we want to fetch the verification questions we will have a specific route for each of them.
+According to this fact, Not only I implemented the `Home` page in the way that always fetch the latest questions from the server, but also I implemented the `questions` page in the way that we see all available verifications.
+In the `questions` page, the user is able to click in each of the verifications and see the questions of that verification in the `questions/:uuid`.
+The Single Page Is exactly Looks like the `Home` page, But more dynamic.
+So, in the real world, we only need to implement the `questions/:uuid` page and the `questions` page.
+
 ## Objectives
 - [x] Mobile First Design
 - [x] Reusable Components
