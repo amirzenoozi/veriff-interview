@@ -4,14 +4,14 @@ import Btn from '../../components/btn'
 import Container from '../../components/container'
 import RadioGroup from '../../components/radio-group'
 import LoadingSpinner from '../../components/loading-spinner'
-import useQuestions from '../../hooks/useQuestions'
+import useTheLastQuestions from '../../hooks/useTheLastQuestions'
 import { ListCheckbox, Error } from '@icon-park/react'
 import { createAnswer } from '../../modules/api'
 import { getChecksUpToFirstNo } from '../../modules/utils'
 import './style.scss'
 
 function Home () {
-	const { questions, fetching, verificationId, error } = useQuestions(10, 1, 'created_at', 'desc')
+	const { questions, fetching, verificationId, error } = useTheLastQuestions()
 	const [results, setResults] = useState<Check[]>([])
 	const [submitting, setSubmitting] = useState<boolean>(false)
 	const radioOptions = [
