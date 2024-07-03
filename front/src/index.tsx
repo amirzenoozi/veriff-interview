@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Home from './pages/home'
 import Error from './pages/error'
 import Layout from './pages/layout'
+import QuestionsList from './pages/questions-list'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Home/>,
+				errorElement: <Error/>
+			},
+			{
+				path: '/questions',
+				element: <QuestionsList/>,
 				errorElement: <Error/>
 			}
 		]
