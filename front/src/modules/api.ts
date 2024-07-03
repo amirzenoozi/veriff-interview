@@ -27,6 +27,22 @@ const getVerifications = async (limit: number, page: number, orderBy: string, or
 	}
 }
 
+const getSingleVerification = async (uuid: string) => {
+	try {
+		const { data } = await api.get(`/verification/${uuid}`)
+		return data
+	} catch (err: any) {
+		console.log('Error', err)
+		const toastMsg = Array.isArray(err?.response?.data?.message) ? err?.response?.data?.message[0] : err?.response?.data?.message ?? 'Something Went Wrong!'
+		toast(toastMsg, {
+			position: 'bottom-left',
+			theme: 'light',
+			type: 'error'
+		})
+		throw err
+	}
+}
+
 const createAnswer = async (data: any) => {
 	try {
 		const response = await api.post('/response', data)
@@ -44,5 +60,6 @@ const createAnswer = async (data: any) => {
 
 export {
 	getVerifications,
+	getSingleVerification,
 	createAnswer
 }
