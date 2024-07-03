@@ -21,6 +21,11 @@ I wrote all **my perspective** and the way I think about the project in the `REA
 - [Backend Docs](./back/README.md)
 - [Frontend Docs](./front/README.md)
 
+## Contributing Format
+Human Errors are the most common errors in the world, so I created a commit convention to make the project more readable and understandable.
+I Explain All The Commit Convention and the way you can contribute to this project in the `CONTRIBUTING.md` file.
+You Just Need To Read [CONTRIBUTING.md](./CONTRIBUTING.md) and follow the steps.
+
 ## Objectives
 - [ ] Apps
   - [x] Frontend
