@@ -6,8 +6,10 @@ import useQuestions from '../../hooks/useQuestions'
 import { ListCheckbox, Error } from '@icon-park/react'
 import { NavLink } from 'react-router-dom'
 import './style.scss'
+import { useTranslation } from 'react-i18next'
 
 function QuestionsList () {
+	const { t } = useTranslation(['main'])
 	const [limit, setLimit] = useState(10)
 	const [pageNumber, setPageNumber] = useState(1)
 	const [orderBy, setOrderBy] = useState('created_at')
@@ -49,7 +51,7 @@ function QuestionsList () {
 							fetching && (
 								<div className={'form__overlay'}>
 									<LoadingSpinner size={'md'}/>
-									<p>We Are Fetching The Questions!</p>
+									<p>{ t('fetchingSets') }</p>
 								</div>
 							)
 						}
@@ -57,7 +59,7 @@ function QuestionsList () {
 							!fetching && !error && questions.length === 0 && (
 								<div className={'form__overlay'}>
 									<ListCheckbox theme="outline" size="32" />
-									<p>There is no Available Question!</p>
+									<p>{ t('emptySets') }</p>
 								</div>
 							)
 						}
@@ -65,7 +67,7 @@ function QuestionsList () {
 							!fetching && error && (
 								<div className={'form__overlay'}>
 									<Error theme="outline" size="32" />
-									<p>Internal Server Error!</p>
+									<p>{ t('serverError') }</p>
 								</div>
 							)
 						}

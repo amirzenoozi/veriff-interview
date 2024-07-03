@@ -1,1 +1,8 @@
-{}
+{
+    "emptySets": "here is no Available Set!",
+    "fetchingSets": "We Are Fetching The All Sets!",
+    "emptyQuestions": "There is no Available Question!",
+    "fetchingQuestions": "We Are Fetching The All Questions!",
+    "serverError": "Internal Server error!",
+    "submit": "Submit"
+}

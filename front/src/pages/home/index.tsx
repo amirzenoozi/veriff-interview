@@ -8,9 +8,11 @@ import useTheLastQuestions from '../../hooks/useTheLastQuestions'
 import { ListCheckbox, Error } from '@icon-park/react'
 import { createAnswer } from '../../modules/api'
 import { getChecksUpToFirstNo } from '../../modules/utils'
+import { useTranslation } from 'react-i18next'
 import './style.scss'
 
 function Home () {
+	const { t } = useTranslation(['main'])
 	const { questions, fetching, verificationId, error } = useTheLastQuestions()
 	const [results, setResults] = useState<Check[]>([])
 	const [submitting, setSubmitting] = useState<boolean>(false)
@@ -134,7 +136,7 @@ function Home () {
 							fetching && (
 								<div className={'form__overlay'}>
 									<LoadingSpinner size={'md'}/>
-									<p>We Are Fetching The Questions!</p>
+									<p>{ t('fetchingQuestions') }</p>
 								</div>
 							)
 						}
@@ -142,7 +144,7 @@ function Home () {
 							!fetching && !error && questions.length === 0 && (
 								<div className={'form__overlay'}>
 									<ListCheckbox theme="outline" size="32" />
-									<p>There is no Available Question!</p>
+									<p>{ t('emptyQuestions') }</p>
 								</div>
 							)
 						}
@@ -150,14 +152,14 @@ function Home () {
 							!fetching && error && (
 								<div className={'form__overlay'}>
 									<Error theme="outline" size="32" />
-									<p>Internal Server Error!</p>
+									<p>{ t('serverError') }</p>
 								</div>
 							)
 						}
 						<div className={'form__footer'} tabIndex={0} onKeyDown={changeFocus}>
 							<Btn
 								variant="primary"
-								text='Submit'
+								text={t('submit')}
 								type='submit'
 								disable={isSubmitDisabled()}
 								block={true}
