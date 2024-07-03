@@ -5,6 +5,7 @@ const useQuestions = (limit: number, page: number, orderBy: string, order: strin
 	const [items, setItems] = useState<any[]>([])
 	const [fetching, setFetching] = useState<boolean>(true)
 	const [verificationId, setVerificationId] = useState<string>('')
+	const [error, setError] = useState<any>(undefined)
 
 	// Get questions from API
 	useEffect(() => {
@@ -14,13 +15,13 @@ const useQuestions = (limit: number, page: number, orderBy: string, order: strin
 			setVerificationId(res.data[0].uuid)
 			setItems(sortedQuestions)
 		}).catch((e) => {
-			console.log('Error', e)
+			setError(e)
 		}).finally(() => {
 			setFetching(false)
 		})
 	}, [])
 
-	return { questions: items, fetching, verificationId }
+	return { questions: items, fetching, verificationId, error }
 }
 
 export default useQuestions
