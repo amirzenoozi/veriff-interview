@@ -9,6 +9,7 @@ import { ListCheckbox, Error } from '@icon-park/react'
 import { createAnswer } from '../../modules/api'
 import { getChecksUpToFirstNo } from '../../modules/utils'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import './style.scss'
 
 function Home () {
@@ -95,7 +96,11 @@ function Home () {
 			verificationUuid: verificationId,
 			results: getChecksUpToFirstNo(results)
 		}).then((res) => {
-			console.log('Response', res)
+			toast('Your Response Saved Successfully!', {
+				position: 'bottom-left',
+				theme: 'light',
+				type: 'success'
+			})
 		}).catch((e) => {
 			return []
 		}).finally(() => {
