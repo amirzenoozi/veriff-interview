@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Home from './pages/home'
 import Error from './pages/error'
 import Layout from './pages/layout'
+import Question from './pages/questoin'
 import QuestionsList from './pages/questions-list'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
 			{
 				path: '/questions',
 				element: <QuestionsList/>,
+				errorElement: <Error/>
+			},
+			{
+				path: '/questions/:uuid',
+				element: <Question/>,
 				errorElement: <Error/>
 			}
 		]
