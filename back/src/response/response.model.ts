@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Verification } from '../verification/verification.model';
 
 @ObjectType()
 export class Result {
@@ -25,4 +26,7 @@ export class Response {
 
 	@Field(type => [Result])
 	results: Result[];
+
+	@Field(type => Verification, { nullable: true })
+	verification?: Verification;
 }

@@ -45,6 +45,7 @@ type Response {
   created_at: DateTime!
   deleted_at: DateTime
   results: [Result!]!
+  verification: Verification
 }
 
 type Query {
