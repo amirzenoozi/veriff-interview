@@ -7,39 +7,57 @@
 	},
 	"item": [
 		{
-			"name": "Get Sets",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{endPoint}}/verification?limit=1&page=1&order_by=created_at&order=desc",
-					"host": [
-						"{{endPoint}}"
-					],
-					"path": [
-						"verification"
-					],
-					"query": [
-						{
-							"key": "limit",
-							"value": "1"
+			"name": "GraphQl",
+			"item": [
+				{
+					"name": "Verifications List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetVerifications(\r\n  $page: Int\r\n  $limit: Int\r\n  $orderBy: String\r\n  $order: String\r\n) {\r\n  getVerifications(\r\n    page: $page\r\n    limit: $limit\r\n    orderBy: $orderBy\r\n    order: $order\r\n  ) {\r\n    data {\r\n      uuid\r\n      created_at\r\n      questions {\r\n        id\r\n        priority\r\n        description\r\n      }\r\n    }\r\n    meta {\r\n      total_count\r\n      total_pages\r\n      current_page\r\n      limit\r\n      order_by\r\n      order\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"page\": 1\r\n}"
+							}
 						},
-						{
-							"key": "page",
-							"value": "1"
-						},
-						{
-							"key": "order_by",
-							"value": "created_at"
-						},
-						{
-							"key": "order",
-							"value": "desc"
+						"url": {
+							"raw": "{{endPoint}}/graphql",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"graphql"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Response List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetResponses {\r\n    getResponses {\r\n        created_at,\r\n        uuid,\r\n        created_at,\r\n        verificationUuid,\r\n        results {\r\n            checkId,\r\n            result\r\n        }\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/graphql",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Create Questions Set",
@@ -124,6 +142,41 @@
 					"path": [
 						"verification",
 						"cf66c465-aacb-4160-b498-081d32b70dd1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endPoint}}/verification?limit=1&page=1&order_by=created_at&order=desc",
+					"host": [
+						"{{endPoint}}"
+					],
+					"path": [
+						"verification"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "order_by",
+							"value": "created_at"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
 					]
 				}
 			},
