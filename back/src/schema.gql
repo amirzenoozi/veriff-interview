@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Question {
+  id: String!
+  priority: Float!
+  description: String!
+}
+
+type Verification {
+  uuid: String!
+  created_at: DateTime!
+  deleted_at: DateTime
+  questions: [Question!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PaginationMeta {
+  total_count: Int!
+  total_pages: Int!
+  current_page: Int!
+  limit: Int!
+  order_by: String!
+  order: String!
+}
+
+type PaginatedVerifications {
+  data: [Verification!]!
+  meta: PaginationMeta!
+}
+
+type Result {
+  checkId: String!
+  result: String!
+}
+
+type Response {
+  uuid: String!
+  verificationUuid: String!
+  created_at: DateTime!
+  deleted_at: DateTime
+  results: [Result!]!
+}
+
+type Query {
+  getVerifications(page: Int! = 1, limit: Int! = 10, orderBy: String! = "created_at", order: String! = "desc"): PaginatedVerifications!
+  getResponses: [Response!]!
+}
