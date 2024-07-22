@@ -22,6 +22,10 @@ export class ResponseService {
 		return count;
 	}
 
+	async findAll(): Promise<Response[]> {
+		return await this.responseModel.find().exec();
+	}
+
 	async createResponse(createResponseDto: CreateResponseDto): Promise<Response> {
 		const { verificationUuid, results } = createResponseDto;
 		const verification = await this.verificationModel.findOne({ uuid: verificationUuid, deleted_at: null });
