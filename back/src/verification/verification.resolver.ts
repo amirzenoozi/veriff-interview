@@ -29,4 +29,11 @@ export class VerificationResolver {
 		const { data, meta } = await this.verificationService.getActiveVerifications(page, limit, order, orderBy);
 		return { data, meta };
 	}
+
+	@Query(returns => Verification)
+	async getVerification(
+		@Args('uuid') uuid: string,
+	): Promise<Verification> {
+		return await this.verificationService.getVerification(uuid);
+	}
 }

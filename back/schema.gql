@@ -50,6 +50,7 @@ type Response {
 
 type Query {
   getVerifications(page: Int! = 1, limit: Int! = 10, orderBy: String! = "created_at", order: String! = "desc"): PaginatedVerifications!
+  getVerification(uuid: String!): Verification!
   getResponses: [Response!]!
 }
 
