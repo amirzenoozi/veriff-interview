@@ -52,3 +52,13 @@ type Query {
   getVerifications(page: Int! = 1, limit: Int! = 10, orderBy: String! = "created_at", order: String! = "desc"): PaginatedVerifications!
   getResponses: [Response!]!
 }
+
+type Mutation {
+  createVerification(questions: [CreateQuestionInput!]!): Verification!
+}
+
+input CreateQuestionInput {
+  id: String!
+  priority: Float!
+  description: String!
+}
