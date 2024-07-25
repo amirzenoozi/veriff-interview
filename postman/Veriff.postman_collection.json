@@ -34,6 +34,54 @@
 					"response": []
 				},
 				{
+					"name": "Create Verifications",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateVerification($questions: [CreateQuestionInput!]!) {\r\n  createVerification(questions: $questions) {\r\n    uuid\r\n    created_at\r\n    deleted_at\r\n    questions {\r\n        description\r\n        priority\r\n        id\r\n    }\r\n  }\r\n}\r\n",
+								"variables": "{\r\n    \"questions\": [\r\n        {\r\n            \"id\": \"aaa\",\r\n            \"priority\": 2,\r\n            \"description\": \"Sample\"\r\n        },\r\n        {\r\n            \"id\": \"bbb\",\r\n            \"priority\": 4,\r\n            \"description\": \"Sample #2\"\r\n        }\r\n    ]\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/graphql",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query GetVerification ($uuid: String!) {\r\n    getVerification (uuid: $uuid) {\r\n        created_at\r\n        uuid\r\n        deleted_at\r\n        questions {\r\n            id\r\n            priority\r\n            description\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"uuid\": \"6658a008-2504-4068-baf8-f6a1afaaf7bb\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/graphql",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Response List",
 					"request": {
 						"method": "POST",
@@ -41,8 +89,32 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query GetResponses {\r\n    getResponses {\r\n        created_at,\r\n        uuid,\r\n        created_at,\r\n        verificationUuid,\r\n        results {\r\n            checkId,\r\n            result\r\n        }\r\n    }\r\n}",
+								"query": "query GetResponses {\r\n    getResponses {\r\n        created_at,\r\n        uuid,\r\n        created_at,\r\n        verificationUuid,\r\n        verification {\r\n            questions {\r\n                description,\r\n                id,\r\n            }\r\n        }\r\n        results {\r\n            checkId,\r\n            result\r\n        }\r\n    }\r\n}",
 								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/graphql",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation RemoverVerification ($uuid: String!) {\r\n    removerVerification (uuid: $uuid) {\r\n        created_at\r\n        uuid\r\n        deleted_at\r\n        questions {\r\n            id\r\n            priority\r\n            description\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"uuid\": \"6658a008-2504-4068-baf8-f6a1afaaf7bb\"\r\n}"
 							}
 						},
 						"url": {
