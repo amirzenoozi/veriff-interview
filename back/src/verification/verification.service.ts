@@ -29,13 +29,17 @@ export class VerificationService {
 		return await createdVerification.save();
 	}
 
-	async getVerification(uuid: string): Promise<Verification | null> {
+	async getVerification(
+		uuid: string,
+	): Promise<Verification | null> {
 		return await this.verificationModel
 			.findOne({uuid, deleted_at: null})
 			.exec();
 	}
 
-	async softDeleteVerification(uuid: string): Promise<Verification | null> {
+	async softDeleteVerification(
+		uuid: string,
+	): Promise<Verification | null> {
 		const verification = await this.verificationModel
 			.findOne({uuid, deleted_at: null})
 			.exec();

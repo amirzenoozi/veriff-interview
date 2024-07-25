@@ -1,10 +1,23 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { VerificationService } from './verification.service';
-import { PaginatedVerifications, Verification } from './verification.model';
+import {
+	CreateQuestionInput,
+	PaginatedVerifications,
+	Verification
+} from './verification.model';
 
 @Resolver(of => Verification)
 export class VerificationResolver {
 	constructor(private verificationService: VerificationService) {}
+
+	@Mutation(returns => Verification)
+	async createVerification(
+		@Args({ name: 'questions', type: () => [CreateQuestionInput] }) questions: CreateQuestionInput[],
+	): Promise<Verification> {
+		const rawData = JSON.stringify(questions, null, 2);
+		const data = { questions: JSON.parse(rawData) };
+		return await this.verificationService.createVerification(data);
+	}
 
 	@Query(returns => PaginatedVerifications)
 	async getVerifications(

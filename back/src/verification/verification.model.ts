@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, InputType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Question {
@@ -55,4 +55,16 @@ export class PaginatedVerifications {
 
 	@Field(type => PaginationMeta)
 	meta: PaginationMeta;
+}
+
+@InputType()
+export class CreateQuestionInput {
+	@Field()
+	id: string;
+
+	@Field()
+	priority: number;
+
+	@Field()
+	description: string;
 }
