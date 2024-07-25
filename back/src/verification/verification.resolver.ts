@@ -36,4 +36,11 @@ export class VerificationResolver {
 	): Promise<Verification> {
 		return await this.verificationService.getVerification(uuid);
 	}
+
+	@Mutation(returns => Verification)
+	async removerVerification(
+		@Args('uuid') uuid: string,
+	): Promise<Verification> {
+		return await this.verificationService.softDeleteVerification(uuid);
+	}
 }
